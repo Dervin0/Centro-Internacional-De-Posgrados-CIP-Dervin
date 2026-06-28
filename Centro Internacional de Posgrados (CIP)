@@ -1,0 +1,923 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIP POSGRADOS - Plataforma Académica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #050b14;
+            --gold: #d4af37;
+            --slate: #0f172a;
+            --cyan: #38bdf8;
+            --accent: #facc15;
+        }
+
+        body {
+            background-color: var(--navy);
+            color: #e2e8f0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Tipografías */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+        .font-serif { font-family: 'Cinzel', serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Componentes de Cristal */
+        .glass {
+            background: rgba(5, 11, 20, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .glass-panel {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.8), rgba(5, 11, 20, 0.9));
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Gradientes y Textos */
+        .gold-gradient {
+            background: linear-gradient(to right, #facc15, #d4af37, #b48608);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .btn-gold {
+            background: linear-gradient(135deg, #d4af37, #b48608);
+            color: var(--navy);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gold:hover {
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Navegación por Secciones - SOLUCIÓN DEL ESPACIO BLANCO */
+        section.view-section {
+            display: none !important; 
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        section.view-section.active {
+            display: block !important;
+            opacity: 1;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Animaciones */
+        .animate-blob {
+            animation: blob 10s infinite;
+        }
+        
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(212,175,55,0.2); }
+            50% { box-shadow: 0 0 25px rgba(212,175,55,0.6); }
+        }
+
+        .animate-glow {
+            animation: pulse-glow 3s infinite;
+        }
+
+        /* Fondos */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .bg-mesh {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background: radial-gradient(circle at 15% 50%, rgba(212, 175, 55, 0.08), transparent 25%),
+                        radial-gradient(circle at 85% 30%, rgba(56, 189, 248, 0.05), transparent 25%);
+        }
+
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .watermark-text {
+            font-size: 4rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 800;
+            color: #ffffff;
+            white-space: nowrap;
+        }
+
+        /* Listas y Cuadrículas */
+        .cuatri-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-gold selection:text-navy">
+
+    <!-- Background Elements -->
+    <div class="bg-mesh"></div>
+    <div class="bg-grid"></div>
+    <div class="absolute top-20 left-10 w-96 h-96 bg-gold/10 rounded-full mix-blend-screen filter blur-[100px] animate-blob"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-cyan/10 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-2000"></div>
+
+    <div class="watermark">
+        <div class="watermark-text">
+            ASESOR EDUCATIVO: DERVIN ALONSO HERNÁNDEZ MORALES <br>
+            CONTACTO OFICIAL: 961 248 6585 <br>
+            DOCUMENTO CIFRADO - USO EXCLUSIVO CIP
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="fixed w-full z-50 glass border-b border-gold/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- LOGO CLICKABLE QUE LLEVA AL INICIO -->
+                <div class="flex items-center gap-4 cursor-pointer hover:opacity-80 transition" onclick="goToView('portada')">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-gold to-yellow-600 flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                        <i class="fa-solid fa-graduation-cap text-navy text-xl"></i>
+                    </div>
+                    <span class="font-serif font-bold text-2xl tracking-widest">CIP <span class="font-sans text-gold font-light tracking-[0.2em]">POSGRADOS</span></span>
+                </div>
+                <div class="hidden md:flex gap-6 items-center">
+                    <button onclick="goToView('seleccion-nivel')" class="text-sm font-medium text-gray-300 hover:text-gold transition uppercase tracking-wider"><i class="fa-solid fa-layer-group mr-2"></i>Oferta</button>
+                    <button onclick="goToView('metodologia')" class="text-sm font-medium text-gray-300 hover:text-gold transition uppercase tracking-wider"><i class="fa-solid fa-microchip mr-2"></i>Ecosistema</button>
+                    <button onclick="preparaInversion()" class="btn-gold px-6 py-2 rounded-lg text-sm tracking-wide shadow-lg"><i class="fa-solid fa-shield-halved mr-2"></i>Inscripción</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="pt-24 pb-16 min-h-screen px-4 max-w-7xl mx-auto relative z-10">
+        
+        <!-- PORTADA WOW -->
+        <section id="portada" class="view-section active py-16 md:py-24">
+            <div class="flex flex-col items-center text-center">
+                <div class="animate-glow inline-block border border-gold/40 rounded-full px-5 py-1.5 mb-8 bg-gold/5 text-gold text-xs font-bold tracking-[0.3em] uppercase backdrop-blur-md">
+                    <i class="fa-solid fa-fingerprint mr-2"></i> Acceso Seguro Institucional
+                </div>
+                <h1 class="text-5xl md:text-8xl font-serif font-bold mb-6 leading-tight tracking-tight">
+                    El Momento de Escalar su <br> <span class="gold-gradient">Futuro Profesional</span>
+                </h1>
+                <p class="text-lg md:text-2xl text-gray-400 mb-12 max-w-4xl mx-auto font-light leading-relaxed">
+                    Descubra la estructura académica de alto rendimiento diseñada para líderes. Acceda a nuestros planes íntegros, panorama del mercado y el ecosistema educativo que impulsará su trayectoria.
+                </p>
+                <div class="flex flex-wrap gap-6 justify-center">
+                    <button onclick="goToView('seleccion-nivel')" class="btn-gold px-10 py-5 rounded-xl text-lg flex items-center gap-4 uppercase tracking-widest font-bold">
+                        Explorar Programas <i class="fa-solid fa-arrow-right-long"></i>
+                    </button>
+                </div>
+                <div class="mt-16 text-xs md:text-sm text-gray-500/80 flex items-center justify-center gap-2 font-mono w-full">
+                    <i class="fa-solid fa-circle-check text-gold/50"></i> Sesión Autorizada: Asesor Dervin Alonso Hernández Morales
+                </div>
+            </div>
+        </section>
+
+        <!-- SELECCIÓN DE NIVEL -->
+        <section id="seleccion-nivel" class="view-section py-12 md:py-16">
+            <div class="flex flex-col items-center">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-12 text-center text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400">Seleccione su Nivel Académico</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-5xl">
+                    
+                    <button onclick="goToView('menu-maestrias')" class="glass-panel p-12 rounded-3xl text-center hover:border-gold/50 transition-all duration-500 group relative overflow-hidden transform hover:-translate-y-2">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="w-24 h-24 mx-auto bg-slate/80 rounded-2xl flex items-center justify-center mb-8 border border-white/5 shadow-2xl group-hover:shadow-gold/20 transition-all">
+                            <i class="fa-solid fa-user-graduate text-5xl text-gold group-hover:scale-110 transition-transform duration-500"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold text-white mb-4 tracking-wide">MAESTRÍAS</h3>
+                        <p class="text-gray-400 font-light text-lg">Especialización Estratégica<br><span class="text-gold/70 text-sm">Duración: 1 a 2 Años</span></p>
+                    </button>
+
+                    <button onclick="goToView('menu-doctorados')" class="glass-panel p-12 rounded-3xl text-center hover:border-gold/50 transition-all duration-500 group relative overflow-hidden transform hover:-translate-y-2">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="w-24 h-24 mx-auto bg-slate/80 rounded-2xl flex items-center justify-center mb-8 border border-white/5 shadow-2xl group-hover:shadow-gold/20 transition-all">
+                            <i class="fa-solid fa-building-columns text-5xl text-gold group-hover:scale-110 transition-transform duration-500"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold text-white mb-4 tracking-wide">DOCTORADOS</h3>
+                        <p class="text-gray-400 font-light text-lg">Máximo Grado Académico<br><span class="text-gold/70 text-sm">Duración: 3 Años (9 Cuatrimestres)</span></p>
+                    </button>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- MENÚ MAESTRÍAS -->
+        <section id="menu-maestrias" class="view-section py-8 md:py-12">
+            <button onclick="goToView('seleccion-nivel')" class="text-gray-400 hover:text-gold mb-8 transition font-mono text-sm tracking-widest uppercase"><i class="fa-solid fa-chevron-left mr-2"></i> Regresar</button>
+            <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4 text-white">Programas de <span class="text-gold">Maestría</span></h2>
+            <p class="text-gray-400 mb-10 text-lg font-light">Estructura académica de vanguardia con Reconocimiento de Validez Oficial (RVOE).</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <button onclick="showCareer('alta-direccion')" class="glass-panel p-8 rounded-2xl text-left hover:border-gold/40 transition group">
+                    <i class="fa-solid fa-briefcase text-3xl text-gold/80 mb-5 group-hover:text-gold transition"></i>
+                    <h3 class="text-xl font-bold text-gray-100 mb-2 group-hover:text-white transition">Alta Dirección</h3>
+                    <div class="w-8 h-1 bg-gold/20 mt-4 group-hover:w-16 transition-all duration-300"></div>
+                </button>
+                
+                <button onclick="showCareer('ed-especial')" class="glass-panel p-8 rounded-2xl text-left hover:border-gold/40 transition group">
+                    <i class="fa-solid fa-hands-holding-child text-3xl text-gold/80 mb-5 group-hover:text-gold transition"></i>
+                    <h3 class="text-xl font-bold text-gray-100 mb-2 group-hover:text-white transition">Educación Especial</h3>
+                    <div class="w-8 h-1 bg-gold/20 mt-4 group-hover:w-16 transition-all duration-300"></div>
+                </button>
+                
+                <button onclick="showCareer('neurociencias')" class="glass-panel p-8 rounded-2xl text-left hover:border-gold/40 transition group">
+                    <i class="fa-solid fa-brain text-3xl text-gold/80 mb-5 group-hover:text-gold transition"></i>
+                    <h3 class="text-xl font-bold text-gray-100 mb-2 group-hover:text-white transition">Enseñanza Basada en Neurociencias</h3>
+                    <div class="w-8 h-1 bg-gold/20 mt-4 group-hover:w-16 transition-all duration-300"></div>
+                </button>
+                
+                <button onclick="showCareer('der-procesal')" class="glass-panel p-8 rounded-2xl text-left hover:border-gold/40 transition group">
+                    <i class="fa-solid fa-gavel text-3xl text-gold/80 mb-5 group-hover:text-gold transition"></i>
+                    <h3 class="text-xl font-bold text-gray-100 mb-2 group-hover:text-white transition">Derecho Procesal</h3>
+                    <div class="w-8 h-1 bg-gold/20 mt-4 group-hover:w-16 transition-all duration-300"></div>
+                </button>
+                
+                <button onclick="showCareer('der-familiar')" class="glass-panel p-8 rounded-2xl text-left hover:border-gold/40 transition group">
+                    <i class="fa-solid fa-scale-balanced text-3xl text-gold/80 mb-5 group-hover:text-gold transition"></i>
+                    <h3 class="text-xl font-bold text-gray-100 mb-2 group-hover:text-white transition">Derecho Familiar y DDHH</h3>
+                    <div class="w-8 h-1 bg-gold/20 mt-4 group-hover:w-16 transition-all duration-300"></div>
+                </button>
+
+                <button onclick="showCareer('admin-hospitales')" class="glass-panel p-8 rounded-2xl text-left hover:border-gold/40 transition group relative overflow-hidden border-t-2 border-t-cyan/30">
+                    <div class="absolute top-0 right-0 p-2 bg-cyan/10 rounded-bl-lg text-[10px] text-cyan uppercase tracking-widest font-bold">Nueva</div>
+                    <i class="fa-solid fa-notes-medical text-3xl text-gold/80 mb-5 group-hover:text-gold transition"></i>
+                    <h3 class="text-xl font-bold text-gray-100 mb-2 group-hover:text-white transition">Administración de Clínicas y Hospitales</h3>
+                    <div class="w-8 h-1 bg-gold/20 mt-4 group-hover:w-16 transition-all duration-300"></div>
+                </button>
+
+                <button onclick="showCareer('maestria-educacion')" class="glass-panel p-8 rounded-2xl text-left hover:border-gold/40 transition group">
+                    <i class="fa-solid fa-chalkboard-user text-3xl text-gold/80 mb-5 group-hover:text-gold transition"></i>
+                    <h3 class="text-xl font-bold text-gray-100 mb-2 group-hover:text-white transition">Maestría en Educación</h3>
+                    <div class="w-8 h-1 bg-gold/20 mt-4 group-hover:w-16 transition-all duration-300"></div>
+                </button>
+                
+                <button onclick="showCareer('diseno-interiores')" class="glass-panel p-8 rounded-2xl text-left hover:border-gold/40 transition group relative overflow-hidden border-t-2 border-t-cyan/30">
+                    <div class="absolute top-0 right-0 p-2 bg-cyan/10 rounded-bl-lg text-[10px] text-cyan uppercase tracking-widest font-bold">Alta Demanda</div>
+                    <i class="fa-solid fa-pen-ruler text-3xl text-gold/80 mb-5 group-hover:text-gold transition"></i>
+                    <h3 class="text-xl font-bold text-gray-100 mb-2 group-hover:text-white transition">Diseño de Interiores</h3>
+                    <div class="w-8 h-1 bg-gold/20 mt-4 group-hover:w-16 transition-all duration-300"></div>
+                </button>
+            </div>
+        </section>
+
+        <!-- MENÚ DOCTORADOS -->
+        <section id="menu-doctorados" class="view-section py-8 md:py-12">
+            <button onclick="goToView('seleccion-nivel')" class="text-gray-400 hover:text-gold mb-8 transition font-mono text-sm tracking-widest uppercase"><i class="fa-solid fa-chevron-left mr-2"></i> Regresar</button>
+            <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4 text-white">Programas de <span class="text-gold">Doctorado</span></h2>
+            <p class="text-gray-400 mb-10 text-lg font-light">Especialización de élite. Programas íntegros de 3 años (9 Cuatrimestres).</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <button onclick="showCareer('doc-educacion')" class="glass-panel p-10 rounded-3xl text-left hover:border-gold/50 transition group border-l-4 border-l-gold">
+                    <div class="flex justify-between items-start mb-6">
+                        <i class="fa-solid fa-book-open-reader text-5xl text-gold/80 group-hover:text-gold transition"></i>
+                        <span class="bg-white/5 border border-white/10 text-gray-300 text-xs px-3 py-1 rounded-full font-mono">RVOE: 20254055</span>
+                    </div>
+                    <h3 class="text-3xl font-bold text-white mb-3">Doctorado en Educación</h3>
+                    <p class="text-gray-400 font-light leading-relaxed">Producción de modelos teóricos-prácticos y gestión escolar.</p>
+                </button>
+
+                <button onclick="showCareer('doc-derecho')" class="glass-panel p-10 rounded-3xl text-left hover:border-gold/50 transition group border-l-4 border-l-gold">
+                    <div class="flex justify-between items-start mb-6">
+                        <i class="fa-solid fa-balance-scale-left text-5xl text-gold/80 group-hover:text-gold transition"></i>
+                        <span class="bg-white/5 border border-white/10 text-gray-300 text-xs px-3 py-1 rounded-full font-mono">RVOE: 20254054</span>
+                    </div>
+                    <h3 class="text-3xl font-bold text-white mb-3">Doctorado en Derecho</h3>
+                    <p class="text-gray-400 font-light leading-relaxed">Investigación en sistemas jurídicos y justicia oral.</p>
+                </button>
+            </div>
+        </section>
+
+        <!-- VISTA DETALLE DE CARRERA -->
+        <section id="view-plan" class="view-section py-8 md:py-12">
+            <button id="btn-back-catalogo" onclick="goToView('menu-maestrias')" class="text-gray-400 hover:text-gold mb-8 transition font-mono text-sm tracking-widest uppercase"><i class="fa-solid fa-chevron-left mr-2"></i> Catálogo Principal</button>
+            
+            <div class="glass-panel p-6 md:p-10 rounded-3xl relative overflow-hidden">
+                <!-- Decoración -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-gold/5 rounded-full mix-blend-screen filter blur-[50px]"></div>
+                
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 relative z-10">
+                    <div>
+                        <h2 id="plan-title" class="text-3xl md:text-4xl font-serif font-bold text-white mb-2">Nombre</h2>
+                        <p id="plan-rvoe" class="text-gold text-sm font-mono tracking-widest hidden"></p>
+                    </div>
+                    <span id="plan-duration" class="bg-slate border border-white/10 text-white px-5 py-2.5 rounded-xl font-medium text-sm tracking-wide shadow-lg whitespace-nowrap">Duración</span>
+                </div>
+
+                <p id="plan-desc" class="text-gray-300 text-lg md:text-xl mb-10 font-light leading-relaxed max-w-4xl relative z-10">Descripción</p>
+
+                <!-- PANORAMA PROFESIONAL -->
+                <div class="bg-gradient-to-br from-slate to-[#0a101f] p-6 md:p-8 rounded-2xl mb-12 border border-white/5 relative overflow-hidden shadow-2xl">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-cyan"></div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fa-solid fa-chart-line text-cyan text-xl"></i>
+                        <h4 class="text-white font-bold tracking-wide uppercase text-sm">Perspectiva del Mercado Laboral</h4>
+                    </div>
+                    <p id="plan-market" class="text-sm md:text-base text-gray-300 leading-relaxed font-light"></p>
+                </div>
+
+                <div class="flex items-center gap-4 mb-8">
+                    <h3 class="text-xl md:text-2xl font-bold text-white">Estructura Académica de Alto Rendimiento</h3>
+                    <div class="flex-1 h-px bg-gradient-to-r from-gold/50 to-transparent"></div>
+                </div>
+
+                <div id="plan-subjects" class="cuatri-grid mb-12 relative z-10">
+                    <!-- Dinámico -->
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-6 mt-10 border-t border-white/10 pt-10">
+                    <button onclick="goToView('metodologia')" class="btn-gold px-8 py-4 rounded-xl font-bold flex-1 text-center uppercase tracking-widest text-sm">
+                        Conocer Ecosistema y Titulación <i class="fa-solid fa-arrow-right-long ml-3"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- METODOLOGÍA Y TITULACIÓN -->
+        <section id="metodologia" class="view-section py-8 md:py-12">
+            <!-- BOTÓN REGRESAR NUEVO -->
+            <button onclick="goToView('view-plan')" class="text-gray-400 hover:text-gold mb-8 transition font-mono text-sm tracking-widest uppercase"><i class="fa-solid fa-chevron-left mr-2"></i> Regresar al Plan</button>
+            
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">Ecosistema Educativo y Proceso de Titulación</h2>
+                <p class="text-gray-400 text-lg font-light">Diseñado estratégicamente para maximizar su tiempo y garantizar su grado oficial.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
+                <!-- MODELO EJECUTIVO -->
+                <div class="glass-panel p-8 md:p-10 rounded-3xl relative mt-4 md:mt-0">
+                    <div class="absolute -top-5 -left-5 bg-gradient-to-br from-gold to-yellow-600 w-14 h-14 rounded-xl flex items-center justify-center text-navy font-bold text-xl shadow-[0_0_20px_rgba(212,175,55,0.4)] transform rotate-3">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-8 text-white ml-6">Modelo Ejecutivo de Alto Rendimiento</h3>
+                    
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-cyan/20 flex items-center justify-center border border-cyan/50 flex-shrink-0">
+                                <i class="fa-solid fa-check text-cyan text-xs"></i>
+                            </div>
+                            <div>
+                                <strong class="text-gray-100 block mb-1">Modalidad No Escolarizada (100% en Línea):</strong>
+                                <p class="text-gray-400 text-sm font-light leading-relaxed">Estudie desde cualquier lugar. Tendrá solo 1 hora de clase magistral semanal en vivo (que queda grabada) impartida por expertos de talla internacional.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-cyan/20 flex items-center justify-center border border-cyan/50 flex-shrink-0">
+                                <i class="fa-solid fa-check text-cyan text-xs"></i>
+                            </div>
+                            <div>
+                                <strong class="text-gray-100 block mb-1">Enfoque Total (1 Materia a la vez):</strong>
+                                <p class="text-gray-400 text-sm font-light leading-relaxed">Cero saturación. Cursa una materia cada 5 semanas, permitiendo una inmersión profunda y compatible con su agenda laboral.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-cyan/20 flex items-center justify-center border border-cyan/50 flex-shrink-0">
+                                <i class="fa-solid fa-check text-cyan text-xs"></i>
+                            </div>
+                            <div>
+                                <strong class="text-gray-100 block mb-1">Evaluación Continua por Competencias:</strong>
+                                <p class="text-gray-400 text-sm font-light leading-relaxed">La evaluación se realiza mediante la <strong>entrega de tareas y proyectos semanales prácticos</strong>. Eliminamos los exámenes memorísticos obsoletos.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- TITULACIÓN -->
+                <div class="glass-panel p-8 md:p-10 rounded-3xl relative mt-4 md:mt-0">
+                    <div class="absolute -top-5 -left-5 bg-gradient-to-br from-gold to-yellow-600 w-14 h-14 rounded-xl flex items-center justify-center text-navy font-bold text-xl shadow-[0_0_20px_rgba(212,175,55,0.4)] transform -rotate-3">
+                        <i class="fa-solid fa-file-contract"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-white ml-6">Proceso de Titulación Ágil y Oficial</h3>
+                    <p class="text-cyan text-sm mb-8 font-mono tracking-wider ml-6">TIEMPO ESTIMADO: 4 A 6 MESES</p>
+                    
+                    <p class="text-sm text-gray-300 mb-6 font-light leading-relaxed bg-white/5 p-4 rounded-xl border border-white/5">
+                        <strong class="text-white block mb-2 font-medium">Opciones Oficiales de Grado:</strong>
+                        CIP ofrece múltiples vías legales, garantizando su éxito. Elija Titulación Automática (promedio de 9.0), Excelencia (10), Publicación, Tesis, o Examen General.
+                    </p>
+
+                    <div class="border border-gold/20 bg-slate/50 p-6 rounded-2xl relative overflow-hidden">
+                        <div class="absolute right-0 top-0 w-32 h-32 bg-gold/5 rounded-bl-full"></div>
+                        <h4 class="text-gold font-bold text-lg mb-3 flex items-center gap-3"><i class="fa-solid fa-money-check-dollar"></i> Inversión Administrativa de Titulación: $22,000 MXN</h4>
+                        <div class="text-sm text-gray-300 font-light leading-relaxed space-y-3 relative z-10">
+                            <p>Transparencia total desde el inicio. Esta cuota final abarca:</p>
+                            <ul class="space-y-2">
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-plus text-green-500 mt-1"></i> <span><strong>SÍ INCLUYE:</strong> Gestión estatal y federal completa hasta la entrega del Certificado, Acta de Examen y Título Electrónico (válido para Cédula).</span></li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-minus text-red-400 mt-1"></i> <span><strong>NO INCLUYE:</strong> Costos por asesoría académica si opta por métodos como Tesis o Curso de Titulación.</span></li>
+                            </ul>
+                            
+                            <!-- RETORNO DE INVERSION -->
+                            <div class="mt-5 bg-gradient-to-r from-red-900/40 to-transparent border-l-2 border-red-500 p-4 rounded-r-xl">
+                                <p class="text-white font-medium mb-1"><i class="fa-solid fa-arrow-trend-up text-red-400 mr-2"></i> El Retorno de Inversión de su Titulación</p>
+                                <p class="text-xs text-gray-400">
+                                    La falta de Título y Cédula oficial frena incrementos salariales y ascensos directivos. Esta inversión administrativa se recupera estadísticamente con el ajuste del <em>primer mes</em> de sueldo en su nuevo nivel. Le entregamos sus documentos en meses, no en años.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VALOR AGREGADO -->
+            <div class="glass-panel p-8 md:p-10 rounded-3xl relative overflow-hidden mb-12 border-t-4 border-t-cyan">
+                <div class="absolute top-0 right-0 bg-cyan/10 text-cyan font-bold px-6 py-2 rounded-bl-2xl text-[10px] md:text-xs tracking-widest uppercase">Valor Agregado Institucional</div>
+                <h3 class="text-2xl md:text-3xl font-serif font-bold text-white mb-3"><i class="fa-solid fa-award text-cyan mr-3"></i> Certificación Adicional Sin Costo</h3>
+                <p class="text-gray-300 font-light mb-8 text-base md:text-lg">Al formalizar su inscripción, enriquezca su perfil eligiendo uno de nuestros 6 programas especializados (Valor Curricular: 40 Hrs):</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="bg-navy/80 p-4 rounded-xl border border-white/5 hover:border-cyan/50 transition duration-300 flex items-center gap-4"><span class="text-cyan font-mono text-xl font-bold opacity-50">01</span><span class="text-sm font-medium text-gray-200">Coaching Transformacional</span></div>
+                    <div class="bg-navy/80 p-4 rounded-xl border border-white/5 hover:border-cyan/50 transition duration-300 flex items-center gap-4"><span class="text-cyan font-mono text-xl font-bold opacity-50">02</span><span class="text-sm font-medium text-gray-200">Diseño de Interiores</span></div>
+                    <div class="bg-navy/80 p-4 rounded-xl border border-white/5 hover:border-cyan/50 transition duration-300 flex items-center gap-4"><span class="text-cyan font-mono text-xl font-bold opacity-50">03</span><span class="text-sm font-medium text-gray-200">Planeación Financiera</span></div>
+                    <div class="bg-navy/80 p-4 rounded-xl border border-white/5 hover:border-cyan/50 transition duration-300 flex items-center gap-4"><span class="text-cyan font-mono text-xl font-bold opacity-50">04</span><span class="text-cyan font-mono text-sm font-bold opacity-50">Teoría General del Delito</span></div>
+                    <div class="bg-navy/80 p-4 rounded-xl border border-white/5 hover:border-cyan/50 transition duration-300 flex items-center gap-4"><span class="text-cyan font-mono text-xl font-bold opacity-50">05</span><span class="text-sm font-medium text-gray-200">Desarrollo Integral del Niño</span></div>
+                    <div class="bg-navy/80 p-4 rounded-xl border border-white/5 hover:border-cyan/50 transition duration-300 flex items-center gap-4"><span class="text-cyan font-mono text-xl font-bold opacity-50">06</span><span class="text-sm font-medium text-gray-200">Ambientes Inclusivos</span></div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button onclick="preparaInversion()" class="btn-gold px-12 py-5 rounded-2xl text-base md:text-lg shadow-[0_0_30px_rgba(212,175,55,0.3)] font-bold uppercase tracking-widest">
+                    Avanzar a Estructura de Inversión <i class="fa-solid fa-arrow-right-long ml-3"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- INVERSIÓN DINÁMICA -->
+        <section id="inversion" class="view-section py-8 md:py-12">
+            <!-- BOTÓN REGRESAR NUEVO -->
+            <button onclick="goToView('metodologia')" class="text-gray-400 hover:text-gold mb-8 transition font-mono text-sm tracking-widest uppercase"><i class="fa-solid fa-chevron-left mr-2"></i> Regresar al Ecosistema</button>
+
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">Esquema de Inversión Institucional</h2>
+                <p class="text-gray-400 text-lg font-light">Estructura financiera asignada para su nivel académico.</p>
+            </div>
+
+            <!-- VALOR DE LA ACTUALIZACION -->
+            <div class="glass-panel border-l-4 border-l-accent p-6 md:p-8 rounded-2xl mb-12 max-w-5xl mx-auto shadow-2xl relative overflow-hidden">
+                <div class="absolute right-0 top-0 opacity-10 text-9xl transform translate-x-4 -translate-y-4"><i class="fa-solid fa-rocket"></i></div>
+                <h3 class="text-xl md:text-2xl font-serif font-bold text-white mb-3 relative z-10">Perspectiva de Crecimiento: El Valor de su Actualización</h3>
+                <p class="text-gray-300 font-light leading-relaxed text-sm md:text-lg relative z-10">
+                    Evaluar únicamente la cuota mensual limita la visión estratégica. Le invitamos a considerar: <strong>¿Cuál es el costo real de posponer su crecimiento, estancarse salarialmente o ceder un ascenso directivo?</strong> El costo de la inacción supera ampliamente la inversión educativa. Este programa es su catalizador profesional más seguro.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 mb-16">
+                <!-- TABLA GENERADA POR JS -->
+                <div id="contenedor-tabla-precios" class="lg:col-span-3 glass-panel p-2 rounded-3xl relative shadow-2xl overflow-hidden">
+                    <!-- Aquí se inyecta la tabla Maestría o Doctorado -->
+                </div>
+
+                <!-- REQUISITOS Y DATOS BANCARIOS -->
+                <div class="lg:col-span-2 flex flex-col gap-6">
+                    <div id="contenedor-requisitos" class="bg-navy/80 p-8 rounded-3xl border border-white/10 shadow-xl backdrop-blur-md">
+                        <h3 class="text-xl font-bold text-white mb-6 border-b border-white/10 pb-3"><i class="fa-regular fa-folder-open text-gold mr-3"></i> Expediente Requerido</h3>
+                        <ul id="lista-requisitos" class="space-y-4 text-sm text-gray-300 font-light">
+                            <!-- Inyectado por JS -->
+                        </ul>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-white to-gray-200 p-8 rounded-3xl shadow-2xl relative overflow-hidden border border-white">
+                        <div class="absolute -right-10 -bottom-10 opacity-5 text-navy text-[150px]"><i class="fa-brands fa-cc-visa"></i></div>
+                        <h3 class="text-xl font-bold mb-6 text-navy border-b border-gray-300 pb-3">Cuentas Institucionales de Ingreso</h3>
+                        <div class="space-y-5 relative z-10">
+                            <div>
+                                <p class="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">Institución Bancaria</p>
+                                <p class="text-2xl font-black text-[#002171]">BBVA México</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">Beneficiario Titular</p>
+                                <p class="font-bold text-navy text-base md:text-lg leading-tight">Red Internacional de Aliados Educativos</p>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                                    <p class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-1">No. Cuenta</p>
+                                    <p class="font-mono text-lg font-bold text-navy">0124142268</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                                    <p class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-1">CLABE</p>
+                                    <p class="font-mono text-sm sm:text-base font-bold text-navy">012100001241422680</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                                <p class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-1">No. Tarjeta (Depósito OXXO)</p>
+                                <p class="font-mono text-lg font-bold tracking-widest text-navy">4555 1130 1443 9139</p>
+                            </div>
+
+                            <div class="bg-red-50 p-4 rounded-xl border border-red-100 text-center mt-2">
+                                <p class="text-xs md:text-sm font-bold text-red-700 tracking-wide"><i class="fa-solid fa-triangle-exclamation mr-1"></i> CONCEPTO OBLIGATORIO: Su Nombre Completo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOTON ACCION FINAL -->
+            <div class="text-center mb-16">
+                <a href="https://forms.gle/31TTEFAAtkcRnWS4A" target="_blank" class="inline-flex items-center justify-center bg-gradient-to-r from-gold to-yellow-600 text-navy px-8 py-5 md:px-12 md:py-6 rounded-2xl font-black text-sm md:text-xl uppercase tracking-widest shadow-[0_10px_40px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform duration-300">
+                    Completar Registro Oficial y Carga de Expediente <i class="fa-solid fa-arrow-up-right-from-square ml-4"></i>
+                </a>
+            </div>
+
+            <div class="border-t border-white/10 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-5">
+                    <div class="w-16 h-16 rounded-full bg-slate border-2 border-gold flex items-center justify-center text-gold text-2xl font-serif shadow-[0_0_15px_rgba(212,175,55,0.3)]">DA</div>
+                    <div>
+                        <p class="text-white font-bold text-xl tracking-wide">Dervin Alonso Hernández Morales</p>
+                        <p class="text-gold text-sm font-medium tracking-widest uppercase mb-1">Asesor Educativo Senior CIP</p>
+                        <p class="text-cyan text-sm font-mono"><i class="fa-brands fa-whatsapp mr-2"></i>Línea Directa: 961 248 6585</p>
+                    </div>
+                </div>
+                <div class="text-center md:text-right text-xs text-gray-500 font-mono">
+                    <p class="mb-2"><i class="fa-solid fa-location-dot text-gray-400 mr-2"></i> Campus Central: 8a. Pte. entre 3a y 4a Norte #437, Tuxtla Gtz, Chiapas.</p>
+                    <p class="text-gold/50">Plataforma de Admisiones | Cifrado y Autorizado.</p>
+                    <p id="timestamp-display" class="opacity-50 mt-1"></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.getElementById('timestamp-display').innerText = "Vigencia: " + new Date().toLocaleString() + " | Sesión Registrada";
+        
+        let nivelActual = 'maestria';
+        let carreraActiva = null;
+
+        function goToView(viewId) {
+            const views = document.querySelectorAll('.view-section');
+            views.forEach(view => view.classList.remove('active'));
+            
+            const target = document.getElementById(viewId);
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        const carrerasData = {
+            'alta-direccion': {
+                tipo: 'maestria',
+                title: "Maestría en Alta Dirección",
+                duration: "1 Año y 8 Meses (5 Cuatrimestres)",
+                rvoe: "RVOE FEDERAL: 20231444",
+                desc: "Formar maestros en Alta Dirección que tengan una amplia visión de la función directiva y gerencial aplicando estilos de liderazgo y estrategias.",
+                market: "Salarios gerenciales promedio de $40,000 a $70,000 MXN mensuales.",
+                plan: [
+                    { cuatri: "Primer Cuatrimestre", materias: ["Economía Empresarial.", "Estrategia Corporativa.", "Dirección y Liderazgo."] },
+                    { cuatri: "Segundo Cuatrimestre", materias: ["Contabilidad Y Finanzas.", "Derecho Corporativo.", "Recursos Humanos por Competencias."] },
+                    { cuatri: "Tercer Cuatrimestre", materias: ["Estadística Aplicada a los negocios", "Análisis e Interpretación de Información Financiera.", "Marketing Empresarial."] },
+                    { cuatri: "Cuarto Cuatrimestre", materias: ["Inteligencia Empresarial", "Gestión de la Innovación y Desarrollo Tecnológico.", "Responsabilidad Social Corporativa"] },
+                    { cuatri: "Quinto Cuatrimestre", materias: ["Seminario de Tesis.", "Coaching.", "Proyectos de Inversión."] }
+                ]
+            },
+            'ed-especial': {
+                tipo: 'maestria',
+                title: "Maestría en Educación Especial",
+                duration: "1 Año y 8 Meses (5 Cuatrimestres)",
+                rvoe: "RVOE FEDERAL: 20231445",
+                desc: "Formar maestros en Educación Especial capaces de evaluar, detectar, diseñar y ejecutar propuestas psicopedagógicas para atender necesidades de enseñanza.",
+                market: "Incremento salarial docente de hasta 40% con especialidad. El déficit en México garantiza empleabilidad inmediata.",
+                plan: [
+                    { cuatri: "Primer cuatrimestre", materias: ["Introducción a la educación especial.", "Detección de necesidades educativas.", "Políticas educativas para las personas con y sin discapacidad."] },
+                    { cuatri: "Segundo cuatrimestre", materias: ["Métodos y técnicas para prácticas inclusivas.", "La psicología en atención a personas con necesidades educativas especiales.", "Diagnóstico, prevención y evaluación psicopedagógica."] },
+                    { cuatri: "Tercer cuatrimestre", materias: ["Discapacidad auditiva.", "Diseño de ambientes de aprendizaje.", "Discapacidad intelectual y aptitudes sobresalientes."] },
+                    { cuatri: "Cuarto cuatrimestre", materias: ["Discapacidades motrices.", "Diagnóstico y atención a personas autistas.", "Atención a familiares de alumnos con discapacidad."] },
+                    { cuatri: "Quinto cuatrimestre", materias: ["Discapacidad visual.", "Diseño y elaboración de proyectos educativos.", "Seminario de tesis."] }
+                ]
+            },
+            'neurociencias': {
+                tipo: 'maestria',
+                title: "Maestría en Enseñanza y Aprendizaje Basado en Neurociencias",
+                duration: "2 Años (6 Cuatrimestres)",
+                rvoe: "RVOE FEDERAL: 20242338",
+                desc: "Educar profesionales capacitados en la integración de los principios neurocientíficos al diseño, implementación y evaluación de procesos educativos.",
+                market: "Consultorías educativas de alto rendimiento pagan honorarios premium (desde $500 a $1,200 MXN por hora).",
+                plan: [
+                    { cuatri: "Primer cuatrimestre", materias: ["Fundamentos de Neuroanatomía y Neurofisiología Para la Educación", "Teorías Contemporáneas del Aprendizaje", "Bioética, Deontología y Educación"] },
+                    { cuatri: "Segundo cuatrimestre", materias: ["Desarrollo del Infante", "Funciones Cognitivas en el Proceso de Aprendizaje", "Emoción y Aprendizaje"] },
+                    { cuatri: "Tercer cuatrimestre", materias: ["Desarrollo del Adolescente", "Inteligencias Múltiples y sus Aplicaciones en el Aula", "Estimulación Temprana y Neurodesarrollo"] },
+                    { cuatri: "Cuarto cuatrimestre", materias: ["Desarrollo del Adulto", "Neuroplasticidad y Aprendizaje", "Neuroeducación, Métodos, Técnicas y Herramientas Didácticas"] },
+                    { cuatri: "Quinto cuatrimestre", materias: ["Neurociencias en el Diseño Curricular", "Neurociencias y Evaluación de los Aprendizajes", "Seminario de Investigación"] },
+                    { cuatri: "Sexto cuatrimestre", materias: ["Neurociencia y Herramientas Digitales para la Educación", "Seminario de Docencias Basada en Neurociencias"] }
+                ]
+            },
+            'der-procesal': {
+                tipo: 'maestria',
+                title: "Maestría en Derecho Procesal Oral Familiar, Mercantil y Civil",
+                duration: "2 Años (6 Cuatrimestres)",
+                rvoe: "RVOE FEDERAL: 20242333",
+                desc: "Formar profesionales altamente capacitados en procesos orales, para aplicar el marco jurídico con eficacia y ética en la resolución de conflictos.",
+                market: "Especialistas en oralidad cobran primas muy altas ($30,000 a $150,000+ MXN por caso). Actualización obligatoria por reforma judicial.",
+                plan: [
+                    { cuatri: "Primer cuatrimestre", materias: ["Teoría General del Proceso", "Lógica Jurídica", "Medios Alternativos de Soluciones de Controversias"] },
+                    { cuatri: "Segundo cuatrimestre", materias: ["Oralidad Familiar", "Hermenéutica Jurídica", "Jurisprudencia Nacional e Internacional"] },
+                    { cuatri: "Tercer cuatrimestre", materias: ["Oralidad Mercantil", "Argumentación Jurídica", "Teoría del Caso"] },
+                    { cuatri: "Cuarto cuatrimestre", materias: ["Oralidad Civil", "Pensamiento Sistemático y Complejo", "Técnicas de Litigación Oral"] },
+                    { cuatri: "Quinto cuatrimestre", materias: ["Metodología de la Investigación Jurídica", "Pedagogía Jurídica", "Litigación Estratégica"] },
+                    { cuatri: "Sexto cuatrimestre", materias: ["Seminario de Tesis", "Derechos Humanos", "Clínica de Litigación Oral"] }
+                ]
+            },
+            'der-familiar': {
+                tipo: 'maestria',
+                title: "Maestría en Derecho Familiar con Enfoque en Derechos Humanos",
+                duration: "2 Años (6 Cuatrimestres)",
+                rvoe: "RVOE FEDERAL: 20262285",
+                desc: "Formar especialistas capaces de analizar y aplicar las leyes familiares en México desde una visión basada en los derechos humanos y el interés superior de la niñez.",
+                market: "El 65% de los litigios comunes son materia familiar. El retorno de la inversión de esta maestría se recupera en los primeros casos litigados.",
+                plan: [
+                    { cuatri: "Primer cuatrimestre", materias: ["Teoría General Del Derecho Familiar Contemporáneo", "Constitucionalismo y Derechos Humanos en el Sistema Jurídico Mexicano", "Derecho Internacional de los Derechos Humanos y Familiares"] },
+                    { cuatri: "Segundo cuatrimestre", materias: ["Matrimonio, Uniones de Hecho y Diversidad Familiar", "Derechos Humanos de Niñas, Niños y Adolescentes", "Violencia Familiar: Marco Jurídico, Prevención Y Atención Con Perspectiva De Género"] },
+                    { cuatri: "Tercer cuatrimestre", materias: ["Patria Potestad, Tutela, Filiación y Personas con Discapacidad", "Derecho Probatorio en Materia Familiar", "Mediación Y Métodos Alternativos De Solución De Controversias Familiar"] },
+                    { cuatri: "Cuarto cuatrimestre", materias: ["Divorcios, Separación y Efectos Jurídicos: Alimentos, Guarda y Custodia Compartida", "Código Nacional de Procedimientos Civiles Y Familiares I: Principios, Proceso Oral y Litigación"] },
+                    { cuatri: "Quinto cuatrimestre", materias: ["Derecho Sucesorio Familiar y Planeación Patrimonial", "Código Nacional de Procedimientos Civiles y Familiares II: Principios, Proceso Oral y Litigación"] },
+                    { cuatri: "Sexto cuatrimestre", materias: ["Técnicas de Litigación Oral", "Litigio Estratégico En Derechos Humanos, Familias Transnacionales Y Derecho Comparado"] }
+                ]
+            },
+            'diseno-interiores': {
+                tipo: 'maestria',
+                title: "Maestría en Diseño de Interiores y Ambientes Arquitectónicos",
+                duration: "2 Años (6 Cuatrimestres)",
+                rvoe: "RVOE FEDERAL: 20242339",
+                desc: "Participará en el análisis, adaptación e incorporación práctica de tendencias, tecnologías y materiales orientados a favorecer una adecuada relación del individuo con su entorno.",
+                market: "El diseño de interiores corporativos y comerciales ha crecido un 35% pospandemia. Proyectos se facturan por m2 con altos márgenes de ganancia.",
+                plan: [
+                    { cuatri: "Primer cuatrimestre", materias: ["Espacios arquitectónicos sustentables", "El color en espacios arquitectónico", "Tópico de ergonomía y antropometría"] },
+                    { cuatri: "Segundo cuatrimestre", materias: ["Espacios arquitectónicos inteligentes", "Materiales y acabados", "La luz natural en el diseño arquitectónico"] },
+                    { cuatri: "Tercer cuatrimestre", materias: ["Diseño de espacios habitacionales", "Gestión de proyectos arquitectónico", "La luz artificial en el diseño arquitectónico"] },
+                    { cuatri: "Cuarto cuatrimestre", materias: ["Diseño de espacios industriales", "El sonido en el diseño arquitectónico"] },
+                    { cuatri: "Quinto cuatrimestre", materias: ["Diseño de espacios comerciales", "Diseño urbano y paisajismo"] },
+                    { cuatri: "Sexto cuatrimestre", materias: ["Diseño de mobiliario", "Seminario de investigación"] }
+                ]
+            },
+            'admin-hospitales': {
+                tipo: 'maestria',
+                title: "Maestría en Administración de Clínicas y Hospitales",
+                duration: "2 Años (6 Cuatrimestres)",
+                rvoe: "RVOE FEDERAL: 20242335",
+                desc: "Analizará marcos teóricos y prácticos orientados a la toma de decisiones eficientes, gestionando finanzas, información, calidad de servicios e implicaciones regulatorias de salud.",
+                market: "Alta demanda en el sector público y privado para perfiles directivos, logrando mejorar radicalmente la operación, presupuestos y calidad hospitalaria.",
+                plan: [
+                    { cuatri: "Primer cuatrimestre", materias: ["Gestión de la información de usuarios de servicios de salud", "Estadística", "Legislación de la prestación de los servicios hospitalarios"] },
+                    { cuatri: "Segundo cuatrimestre", materias: ["Gestión tecnológica en clínicas y hospitales", "Métodos cuantitativos para la toma de decisiones", "Fundamentos de la contabilidad hospitalaria"] },
+                    { cuatri: "Tercer cuatrimestre", materias: ["Procesos administrativos en clínicas y hospitales", "Contabilidad de costo hospitalarios", "Gestión de la calidad en clínicas y hospitales"] },
+                    { cuatri: "Cuarto cuatrimestre", materias: ["Gestión de los recursos humanos en clínicas y hospitales I", "Certificación y acreditación de la calidad hospitalaria", "Formulación y evaluación de los proyectos de investigación"] },
+                    { cuatri: "Quinto cuatrimestre", materias: ["Gestión de los recursos humanos en clínicas y hospitales II", "Planeación estratégica en clínicas y hospitales", "Seminario de investigación"] },
+                    { cuatri: "Sexto cuatrimestre", materias: ["Gestión de servicio hospitalarios", "Mercadotecnia aplicada en clínicas y hospitales"] }
+                ]
+            },
+            'maestria-educacion': {
+                tipo: 'maestria',
+                title: "Maestría en Educación",
+                duration: "2 Años (6 Cuatrimestres)",
+                rvoe: "RVOE FEDERAL: 20262284",
+                desc: "Aplicar fundamentos filosóficos, neurocientíficos y pedagógicos para promover la inclusión, inteligencia emocional y la evaluación institucional con herramientas tecnológicas.",
+                market: "Ideal para la mejora del perfil docente, obtención de plazas e ingresos al servicio profesional directivo con sólidos fundamentos de gestión escolar.",
+                plan: [
+                    { cuatri: "Primer cuatrimestre", materias: ["Bases Filosóficas de la Pedagogía", "Desarrollo Integral y Educación"] },
+                    { cuatri: "Segundo cuatrimestre", materias: ["Neurociencias Aplicadas a la Educación", "Gestión de la diversidad cultural"] },
+                    { cuatri: "Tercer cuatrimestre", materias: ["Tecnologías Emergentes e Inteligencia Artificial en Educación", "Educación Inclusiva"] },
+                    { cuatri: "Cuarto cuatrimestre", materias: ["Educación e Inteligencia Emocional", "Gestión Escolar I"] },
+                    { cuatri: "Quinto cuatrimestre", materias: ["Didáctica y Estrategias de Intervención Educativa", "Gestión Escolar II"] },
+                    { cuatri: "Sexto cuatrimestre", materias: ["Metodología de la Investigación Educativa", "Evaluación Institucional en Educación"] }
+                ]
+            },
+            // DOCTORADOS
+            'doc-educacion': {
+                tipo: 'doctorado',
+                title: "Doctorado en Educación",
+                duration: "3 Años (9 Cuatrimestres)",
+                rvoe: "RVOE FEDERAL: 20254055",
+                desc: "Producción de modelos teóricos-prácticos originales para incidir en el fenómeno educativo, gestión escolar y políticas públicas.",
+                market: "El Grado de Doctor eleva automáticamente el tabulador salarial en el sector público y es requisito para rectorías y alta investigación.",
+                plan: [
+                    { cuatri: "1° Cuatrimestre", materias: ["Organización y Dirección Escolar I", "Filosofía y Epistemología de la Educación"] },
+                    { cuatri: "2° Cuatrimestre", materias: ["Organización y Dirección Escolar II", "Educación y Desarrollo Humano"] },
+                    { cuatri: "3° Cuatrimestre", materias: ["Evaluación de Centros Escolares para la Calidad Educativa", "Gestión de la Diversidad Cultural"] },
+                    { cuatri: "4° Cuatrimestre", materias: ["Divulgación de la Ciencia", "Atención a la Diversidad y Educación Inclusiva"] },
+                    { cuatri: "5° Cuatrimestre", materias: ["Investigación Doctoral I", "Neurociencia, Aprendizaje e Innovación Educativa"] },
+                    { cuatri: "6° Cuatrimestre", materias: ["Investigación Doctoral II", "Nuevas Tecnologías, Aprendizaje y Educación"] },
+                    { cuatri: "7° Cuatrimestre", materias: ["Investigación Doctoral III", "Educación e Inteligencia Emocional"] },
+                    { cuatri: "8° Cuatrimestre", materias: ["Investigación Doctoral IV", "Orientación y Tutoría Educativa y Vocacional"] },
+                    { cuatri: "9° Cuatrimestre", materias: ["Investigación Doctoral V"] }
+                ]
+            },
+            'doc-derecho': {
+                tipo: 'doctorado',
+                title: "Doctorado en Derecho",
+                duration: "3 Años (9 Cuatrimestres)",
+                rvoe: "RVOE FEDERAL: 20254054",
+                desc: "Coordinación de investigación profunda en sistemas jurídicos contemporáneos, justicia oral, teoría de sistemas y hermenéutica.",
+                market: "Posiciona al abogado en la élite jurídica nacional (Magistraturas, Suprema Corte, Consultoría Gubernamental de Alto Nivel).",
+                plan: [
+                    { cuatri: "1° Cuatrimestre", materias: ["Lógica Jurídica", "Filosofía del Derecho"] },
+                    { cuatri: "2° Cuatrimestre", materias: ["Pensamiento Complejo", "Epistemología Jurídica"] },
+                    { cuatri: "3° Cuatrimestre", materias: ["Teoría de Sistemas Aplicadas al Derecho", "Pedagogía Jurídica"] },
+                    { cuatri: "4° Cuatrimestre", materias: ["Neurociencia Aplicada al Derecho", "Metodología de la Investigación Jurídica"] },
+                    { cuatri: "5° Cuatrimestre", materias: ["Investigación Doctoral I", "Hermenéutica Jurídica"] },
+                    { cuatri: "6° Cuatrimestre", materias: ["Investigación Doctoral II", "Argumentación Jurídica"] },
+                    { cuatri: "7° Cuatrimestre", materias: ["Investigación Doctoral III", "Técnicas de Litigación Oral"] },
+                    { cuatri: "8° Cuatrimestre", materias: ["Investigación Doctoral IV", "Litigación Estratégica"] },
+                    { cuatri: "9° Cuatrimestre", materias: ["Investigación Doctoral V"] }
+                ]
+            }
+        };
+
+        function showCareer(id) {
+            const data = carrerasData[id];
+            if (!data) return;
+            
+            nivelActual = data.tipo;
+            carreraActiva = data;
+
+            document.getElementById('plan-title').innerText = data.title;
+            document.getElementById('plan-duration').innerText = data.duration;
+            
+            const rvoeEl = document.getElementById('plan-rvoe');
+            if(data.rvoe) {
+                rvoeEl.innerText = data.rvoe;
+                rvoeEl.classList.remove('hidden');
+            } else {
+                rvoeEl.classList.add('hidden');
+            }
+            
+            document.getElementById('plan-desc').innerText = data.desc;
+            document.getElementById('plan-market').innerHTML = data.market;
+
+            // Configurar botón regresar dependiendo del nivel
+            const btnBack = document.getElementById('btn-back-catalogo');
+            btnBack.setAttribute('onclick', nivelActual === 'maestria' ? "goToView('menu-maestrias')" : "goToView('menu-doctorados')");
+
+            const listContainer = document.getElementById('plan-subjects');
+            listContainer.innerHTML = '';
+            
+            data.plan.forEach(cuatri => {
+                let materiasHtml = '';
+                cuatri.materias.forEach(materia => {
+                    materiasHtml += `<li class="flex items-start gap-3 mb-3"><i class="fa-solid fa-angle-right text-cyan mt-1 text-xs"></i><span class="text-sm text-gray-200 font-light leading-snug">${materia}</span></li>`;
+                });
+                listContainer.innerHTML += `
+                    <div class="bg-slate/40 border border-white/5 rounded-2xl p-6 hover:border-cyan/30 transition-all duration-300">
+                        <h5 class="text-gold font-bold border-b border-white/10 pb-3 mb-4 text-sm tracking-widest uppercase">${cuatri.cuatri}</h5>
+                        <ul>${materiasHtml}</ul>
+                    </div>
+                `;
+            });
+
+            goToView('view-plan');
+        }
+
+        function preparaInversion() {
+            // Validar si 'carreraActiva' existe, de lo contrario obligamos a seleccionar nivel
+            if(!carreraActiva) {
+                goToView('seleccion-nivel');
+                return;
+            }
+
+            const contenedorTabla = document.getElementById('contenedor-tabla-precios');
+            const listaReq = document.getElementById('lista-requisitos');
+            
+            if (nivelActual === 'maestria') {
+                // Identificamos cuántos cuatrimestres tiene para el resumen
+                let durationText = (carreraActiva && carreraActiva.plan.length === 6) ? "Plan de 6 Cuatrimestres (2 Años)" : "Plan de 5 Cuatrimestres (1 Año y 8 Meses)";
+
+                contenedorTabla.innerHTML = `
+                    <div class="bg-gradient-to-r from-gold to-yellow-600 text-navy font-bold text-center py-4 rounded-t-3xl uppercase tracking-[0.2em] text-sm md:text-lg">BECA EDUCATIVA: MAESTRÍA</div>
+                    <div class="p-6 md:p-8 bg-slate/50 rounded-b-3xl">
+                        
+                        <div class="mb-4 text-center">
+                            <span class="bg-white/10 text-cyan text-xs px-3 py-1 rounded-full font-mono tracking-widest border border-white/10">${durationText}</span>
+                        </div>
+
+                        <div class="flex justify-between items-end border-b border-white/10 pb-6 mb-6">
+                            <div><p class="text-gray-400 text-xs md:text-sm uppercase tracking-widest font-bold mb-1">Inscripción Única</p><p class="line-through text-red-400/70 text-xs">Precio Regular: $2,000</p></div>
+                            <div class="text-3xl md:text-4xl font-black text-white">$1,000 <span class="text-sm md:text-base text-gold font-medium">MXN</span></div>
+                        </div>
+
+                        <div class="mb-6 bg-navy/40 p-4 md:p-6 rounded-2xl border border-white/5">
+                            <h4 class="font-bold text-white mb-4 text-xs md:text-sm tracking-widest uppercase text-cyan">Primer Cuatrimestre</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center text-sm"><span class="text-gray-300 font-light">Mensualidad 1</span> <div><span class="line-through text-red-400/70 text-xs mr-3">$3,200</span><strong class="text-white text-base md:text-lg">$1,600</strong></div></div>
+                                <div class="flex justify-between items-center text-sm"><span class="text-gray-300 font-light">Mensualidad 2</span> <div><span class="line-through text-red-400/70 text-xs mr-3">$3,200</span><strong class="text-white text-base md:text-lg">$1,600</strong></div></div>
+                                <div class="flex justify-between items-center text-sm"><span class="text-gray-300 font-light">Mensualidad 3</span> <div><span class="line-through text-red-400/70 text-xs mr-3">$3,200</span><strong class="text-white text-base md:text-lg">$1,600</strong></div></div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 md:p-6 border border-white/5 rounded-2xl bg-gradient-to-b from-transparent to-navy/30">
+                            <h4 class="font-bold text-white mb-4 text-xs md:text-sm tracking-widest uppercase text-cyan">Siguientes Cuatrimestres</h4>
+                            <div class="space-y-3">
+                                <div class="flex flex-col md:flex-row md:justify-between md:items-center text-sm mb-2 md:mb-0"><span class="text-gray-300 font-light mb-1 md:mb-0">Reinscripción Cuatrimestral</span> <div><span class="line-through text-red-400/70 text-xs mr-3">$2,000</span><strong class="text-white text-base md:text-lg">$1,600</strong></div></div>
+                                <div class="flex flex-col md:flex-row md:justify-between md:items-center text-sm"><span class="text-gray-300 font-light mb-1 md:mb-0">3 Mensualidades Fijas de:</span> <div><span class="line-through text-red-400/70 text-xs mr-3">$3,200</span><strong class="text-white text-base md:text-lg">$1,600</strong></div></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 bg-cyan/5 p-4 rounded-xl border border-cyan/20">
+                            <p class="text-xs text-cyan font-light leading-relaxed">
+                                <i class="fa-solid fa-lightbulb mr-2 text-gold"></i>
+                                <strong class="font-medium">Estrategia de Flujo:</strong> Los pagos no coinciden en el mismo mes. (Ej. si reinscribe en Dic, la 1ra colegiatura del cuatri se paga en Ene).
+                            </p>
+                        </div>
+                    </div>
+                `;
+                
+                listaReq.innerHTML = `
+                    <li class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10"><i class="fa-solid fa-check text-cyan text-xs"></i></div> <span class="text-gray-200">Acta de nacimiento (Digital/Actualizada)</span></li>
+                    <li class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10"><i class="fa-solid fa-check text-cyan text-xs"></i></div> <span class="text-gray-200">Identificación oficial INE</span></li>
+                    <li class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10"><i class="fa-solid fa-check text-cyan text-xs"></i></div> <span class="text-gray-200">CURP Electrónica</span></li>
+                    <li class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10"><i class="fa-solid fa-check text-cyan text-xs"></i></div> <span class="text-gray-200">Certificado de Licenciatura</span></li>
+                    <li class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10"><i class="fa-solid fa-check text-cyan text-xs"></i></div> <span class="text-gray-200">Título Profesional (Si ya está titulado)</span></li>
+                    <li class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10"><i class="fa-solid fa-check text-cyan text-xs"></i></div> <span class="text-gray-200">Cédula Profesional (Federal)</span></li>
+                `;
+            } else {
+                contenedorTabla.innerHTML = `
+                    <div class="bg-gradient-to-r from-gold to-yellow-600 text-navy font-bold text-center py-4 rounded-t-3xl uppercase tracking-[0.2em] text-sm md:text-lg">BECA EDUCATIVA: DOCTORADO</div>
+                    <div class="p-6 md:p-8 bg-slate/50 rounded-b-3xl">
+                        
+                        <div class="mb-4 text-center">
+                            <span class="bg-white/10 text-cyan text-xs px-3 py-1 rounded-full font-mono tracking-widest border border-white/10">Plan de 9 Cuatrimestres (3 Años)</span>
+                        </div>
+
+                        <div class="flex justify-between items-end border-b border-white/10 pb-6 mb-6">
+                            <div><p class="text-gray-400 text-xs md:text-sm uppercase tracking-widest font-bold mb-1">Inscripción Única</p><p class="line-through text-red-400/70 text-xs">Precio Regular: $4,500</p></div>
+                            <div class="text-3xl md:text-4xl font-black text-white">$1,500 <span class="text-sm md:text-base text-gold font-medium">MXN</span></div>
+                        </div>
+
+                        <div class="mb-6 bg-navy/40 p-4 md:p-6 rounded-2xl border border-white/5">
+                            <h4 class="font-bold text-white mb-4 text-xs md:text-sm tracking-widest uppercase text-cyan">Primer Cuatrimestre</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center text-sm"><span class="text-gray-300 font-light">Mensualidad 1</span> <div><span class="line-through text-red-400/70 text-xs mr-3">$4,500</span><strong class="text-white text-base md:text-lg">$2,500</strong></div></div>
+                                <div class="flex justify-between items-center text-sm"><span class="text-gray-300 font-light">Mensualidad 2</span> <div><span class="line-through text-red-400/70 text-xs mr-3">$4,500</span><strong class="text-white text-base md:text-lg">$2,500</strong></div></div>
+                                <div class="flex justify-between items-center text-sm"><span class="text-gray-300 font-light">Mensualidad 3</span> <div><span class="line-through text-red-400/70 text-xs mr-3">$4,500</span><strong class="text-white text-base md:text-lg">$2,500</strong></div></div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 md:p-6 border border-white/5 rounded-2xl bg-gradient-to-b from-transparent to-navy/30">
+                            <h4 class="font-bold text-white mb-4 text-xs md:text-sm tracking-widest uppercase text-cyan">Cuatrimestres Restantes (2 al 9)</h4>
+                            <div class="space-y-3">
+                                <div class="flex flex-col md:flex-row md:justify-between md:items-center text-sm mb-2 md:mb-0"><span class="text-gray-300 font-light mb-1 md:mb-0">Reinscripción Cuatrimestral</span> <div><span class="line-through text-red-400/70 text-xs mr-3">$4,500</span><strong class="text-white text-base md:text-lg">$2,500</strong></div></div>
+                                <div class="flex flex-col md:flex-row md:justify-between md:items-center text-sm"><span class="text-gray-300 font-light mb-1 md:mb-0">3 Mensualidades Fijas de:</span> <div><span class="line-through text-red-400/70 text-xs mr-3">$4,500</span><strong class="text-white text-base md:text-lg">$2,500</strong></div></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 bg-gold/10 p-4 rounded-xl border border-gold/30 text-center">
+                            <p class="text-xs md:text-sm text-gold font-bold uppercase tracking-widest">
+                                Ahorro Total de Beca en Doctorado: $73,000 MXN.
+                            </p>
+                        </div>
+                    </div>
+                `;
+                
+                listaReq.innerHTML = `
+                    <li class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10"><i class="fa-solid fa-check text-cyan text-xs"></i></div> <span class="text-gray-200">Acta de nacimiento (Digital/Actualizada)</span></li>
+                    <li class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10"><i class="fa-solid fa-check text-cyan text-xs"></i></div> <span class="text-gray-200">Identificación oficial INE</span></li>
+                    <li class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10"><i class="fa-solid fa-check text-cyan text-xs"></i></div> <span class="text-gray-200">CURP Electrónica</span></li>
+                    <li class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center border border-gold/50 shadow-[0_0_10px_rgba(212,175,55,0.4)]"><i class="fa-solid fa-check text-gold text-xs"></i></div> <span class="text-white font-bold tracking-wide">Certificado de Maestría</span></li>
+                    <li class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center border border-gold/50 shadow-[0_0_10px_rgba(212,175,55,0.4)]"><i class="fa-solid fa-check text-gold text-xs"></i></div> <span class="text-white font-bold tracking-wide">Copia de Título de Grado</span></li>
+                    <li class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center border border-gold/50 shadow-[0_0_10px_rgba(212,175,55,0.4)]"><i class="fa-solid fa-check text-gold text-xs"></i></div> <span class="text-white font-bold tracking-wide">Copia de Cédula de Grado</span></li>
+                `;
+            }
+
+            goToView('inversion');
+        }
+    </script>
+</body>
+</html>
+
+
+```
