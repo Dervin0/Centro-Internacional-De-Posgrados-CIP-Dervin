@@ -369,88 +369,104 @@
             </div>
         </section>
 
-        <!-- METODOLOGÍA Y TITULACIÓN -->
+        <!-- METODOLOGÍA Y TITULACIÓN ACTUALIZADA -->
         <section id="metodologia" class="view-section py-8 md:py-12">
             <!-- BOTÓN REGRESAR NUEVO -->
             <button onclick="goToView('view-plan')" class="text-gray-400 hover:text-gold mb-8 transition font-mono text-sm tracking-widest uppercase"><i class="fa-solid fa-chevron-left mr-2"></i> Regresar al Plan</button>
             
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">Ecosistema Educativo y Proceso de Titulación</h2>
+            <div class="text-center mb-10">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">Ecosistema Educativo</h2>
                 <p class="text-gray-400 text-lg font-light">Diseñado estratégicamente para maximizar su tiempo y garantizar su grado oficial.</p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
-                <!-- MODELO EJECUTIVO -->
-                <div class="glass-panel p-8 md:p-10 rounded-3xl relative mt-4 md:mt-0">
-                    <div class="absolute -top-5 -left-5 bg-gradient-to-br from-gold to-yellow-600 w-14 h-14 rounded-xl flex items-center justify-center text-navy font-bold text-xl shadow-[0_0_20px_rgba(212,175,55,0.4)] transform rotate-3">
-                        <i class="fa-solid fa-laptop-code"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-8 text-white ml-6">Modelo Ejecutivo de Alto Rendimiento</h3>
-                    
-                    <ul class="space-y-6">
-                        <li class="flex items-start gap-4">
-                            <div class="mt-1 w-6 h-6 rounded-full bg-cyan/20 flex items-center justify-center border border-cyan/50 flex-shrink-0">
-                                <i class="fa-solid fa-check text-cyan text-xs"></i>
-                            </div>
-                            <div>
-                                <strong class="text-gray-100 block mb-1">Modalidad No Escolarizada (100% en Línea):</strong>
-                                <p class="text-gray-400 text-sm font-light leading-relaxed">Estudie desde cualquier lugar. Tendrá solo 1 hora de clase magistral semanal en vivo (que queda grabada) impartida por expertos de talla internacional.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div class="mt-1 w-6 h-6 rounded-full bg-cyan/20 flex items-center justify-center border border-cyan/50 flex-shrink-0">
-                                <i class="fa-solid fa-check text-cyan text-xs"></i>
-                            </div>
-                            <div>
-                                <strong class="text-gray-100 block mb-1">Enfoque Total (1 Materia a la vez):</strong>
-                                <p class="text-gray-400 text-sm font-light leading-relaxed">Cero saturación. Cursa una materia cada 5 semanas, permitiendo una inmersión profunda y compatible con su agenda laboral.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div class="mt-1 w-6 h-6 rounded-full bg-cyan/20 flex items-center justify-center border border-cyan/50 flex-shrink-0">
-                                <i class="fa-solid fa-check text-cyan text-xs"></i>
-                            </div>
-                            <div>
-                                <strong class="text-gray-100 block mb-1">Evaluación Continua por Competencias:</strong>
-                                <p class="text-gray-400 text-sm font-light leading-relaxed">La evaluación se realiza mediante la <strong>entrega de tareas y proyectos semanales prácticos</strong>. Eliminamos los exámenes memorísticos obsoletos.</p>
-                            </div>
-                        </li>
-                    </ul>
+            <!-- BANNER INICIO DE CLASES -->
+            <div class="bg-cyan/10 border border-cyan/30 text-cyan p-4 rounded-xl mb-12 flex flex-col md:flex-row items-center justify-center gap-3 font-bold tracking-widest uppercase shadow-lg shadow-cyan/5">
+                <i class="fa-solid fa-calendar-check text-2xl"></i> 
+                <span>Inicio de clases: Segunda semana de septiembre</span>
+            </div>
+
+            <!-- MODELO EJECUTIVO -->
+            <div class="glass-panel p-8 md:p-10 rounded-3xl relative mb-12">
+                <div class="absolute -top-5 -left-5 bg-gradient-to-br from-gold to-yellow-600 w-14 h-14 rounded-xl flex items-center justify-center text-navy font-bold text-xl shadow-[0_0_20px_rgba(212,175,55,0.4)] transform rotate-3">
+                    <i class="fa-solid fa-laptop-code"></i>
                 </div>
-
-                <!-- TITULACIÓN -->
-                <div class="glass-panel p-8 md:p-10 rounded-3xl relative mt-4 md:mt-0">
-                    <div class="absolute -top-5 -left-5 bg-gradient-to-br from-gold to-yellow-600 w-14 h-14 rounded-xl flex items-center justify-center text-navy font-bold text-xl shadow-[0_0_20px_rgba(212,175,55,0.4)] transform -rotate-3">
-                        <i class="fa-solid fa-file-contract"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-2 text-white ml-6">Proceso de Titulación Ágil y Oficial</h3>
-                    <p class="text-cyan text-sm mb-8 font-mono tracking-wider ml-6">TIEMPO ESTIMADO: 4 A 6 MESES</p>
-                    
-                    <p class="text-sm text-gray-300 mb-6 font-light leading-relaxed bg-white/5 p-4 rounded-xl border border-white/5">
-                        <strong class="text-white block mb-2 font-medium">Opciones Oficiales de Grado:</strong>
-                        CIP ofrece múltiples vías legales, garantizando su éxito. Elija Titulación Automática (promedio de 9.0), Excelencia (10), Publicación, Tesis, o Examen General.
-                    </p>
-
-                    <div class="border border-gold/20 bg-slate/50 p-6 rounded-2xl relative overflow-hidden">
-                        <div class="absolute right-0 top-0 w-32 h-32 bg-gold/5 rounded-bl-full"></div>
-                        <h4 class="text-gold font-bold text-lg mb-3 flex items-center gap-3"><i class="fa-solid fa-money-check-dollar"></i> Inversión Administrativa de Titulación: $22,000 MXN</h4>
-                        <div class="text-sm text-gray-300 font-light leading-relaxed space-y-3 relative z-10">
-                            <p>Transparencia total desde el inicio. Esta cuota final abarca:</p>
-                            <ul class="space-y-2">
-                                <li class="flex items-start gap-2"><i class="fa-solid fa-plus text-green-500 mt-1"></i> <span><strong>SÍ INCLUYE:</strong> Gestión estatal y federal completa hasta la entrega del Certificado, Acta de Examen y Título Electrónico (válido para Cédula).</span></li>
-                                <li class="flex items-start gap-2"><i class="fa-solid fa-minus text-red-400 mt-1"></i> <span><strong>NO INCLUYE:</strong> Costos por asesoría académica si opta por métodos como Tesis o Curso de Titulación.</span></li>
-                            </ul>
-                            
-                            <!-- RETORNO DE INVERSION -->
-                            <div class="mt-5 bg-gradient-to-r from-red-900/40 to-transparent border-l-2 border-red-500 p-4 rounded-r-xl">
-                                <p class="text-white font-medium mb-1"><i class="fa-solid fa-arrow-trend-up text-red-400 mr-2"></i> El Retorno de Inversión de su Titulación</p>
-                                <p class="text-xs text-gray-400">
-                                    La falta de Título y Cédula oficial frena incrementos salariales y ascensos directivos. Esta inversión administrativa se recupera estadísticamente con el ajuste del <em>primer mes</em> de sueldo en su nuevo nivel. Le entregamos sus documentos en meses, no en años.
-                                </p>
-                            </div>
+                <h3 class="text-2xl font-bold mb-8 text-white ml-6">Modelo Ejecutivo de Alto Rendimiento</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white/5 border border-white/10 p-6 rounded-2xl hover:border-cyan/30 transition-colors">
+                        <div class="w-10 h-10 rounded-full bg-cyan/20 flex items-center justify-center border border-cyan/50 mb-4">
+                            <i class="fa-solid fa-wifi text-cyan"></i>
                         </div>
+                        <strong class="text-gray-100 block mb-2">Modalidad No Escolarizada (100% en Línea)</strong>
+                        <p class="text-gray-400 text-sm font-light leading-relaxed">Estudie desde cualquier lugar. Tendrá solo 1 hora de clase magistral semanal en vivo (que queda grabada) impartida por expertos de talla internacional.</p>
+                    </div>
+                    
+                    <div class="bg-white/5 border border-white/10 p-6 rounded-2xl hover:border-cyan/30 transition-colors">
+                        <div class="w-10 h-10 rounded-full bg-cyan/20 flex items-center justify-center border border-cyan/50 mb-4">
+                            <i class="fa-solid fa-crosshairs text-cyan"></i>
+                        </div>
+                        <strong class="text-gray-100 block mb-2">Enfoque Total (1 Materia a la vez)</strong>
+                        <p class="text-gray-400 text-sm font-light leading-relaxed">Cero saturación. Cursa una materia cada 5 semanas, permitiendo una inmersión profunda y compatible con su agenda laboral.</p>
+                    </div>
+
+                    <div class="bg-white/5 border border-white/10 p-6 rounded-2xl hover:border-cyan/30 transition-colors">
+                        <div class="w-10 h-10 rounded-full bg-cyan/20 flex items-center justify-center border border-cyan/50 mb-4">
+                            <i class="fa-solid fa-tasks text-cyan"></i>
+                        </div>
+                        <strong class="text-gray-100 block mb-2">Evaluación Continua por Competencias</strong>
+                        <p class="text-gray-400 text-sm font-light leading-relaxed">La evaluación se realiza mediante la <strong>entrega de tareas y proyectos semanales prácticos</strong>. Eliminamos los exámenes memorísticos obsoletos.</p>
                     </div>
                 </div>
+            </div>
+
+            <!-- INVERSIÓN Y TITULACIÓN ELEGANTES -->
+            <div class="glass-panel p-8 md:p-10 rounded-3xl relative mb-12 border-t-4 border-t-gold">
+                <div class="text-center mb-8">
+                    <h3 class="text-3xl md:text-4xl font-serif font-bold text-white mb-4">💼 Inversión en tu Titulación</h3>
+                </div>
+
+                <p class="text-gray-300 text-lg font-light leading-relaxed mb-8 text-center max-w-4xl mx-auto">
+                    La titulación y el acta de examen representan el paso final para obtener tu grado académico y cuentan con un costo de <strong>$22,000 MXN</strong>. Nuestro compromiso es la transparencia: desde el inicio conocerás todos los costos de tu formación, sin cargos ocultos al finalizar tus estudios.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                    <!-- Qué incluye -->
+                    <div class="bg-navy/50 border border-white/10 p-6 rounded-2xl">
+                        <h4 class="text-white font-bold mb-4 text-lg border-b border-white/10 pb-2">Este proceso incluye:</h4>
+                        <ul class="space-y-3 text-sm text-gray-300 font-light">
+                            <li class="flex gap-3 items-start"><i class="fa-solid fa-check text-gold mt-1"></i> Integración y revisión de tu expediente.</li>
+                            <li class="flex gap-3 items-start"><i class="fa-solid fa-check text-gold mt-1"></i> Evaluación y proceso de titulación.</li>
+                            <li class="flex gap-3 items-start"><i class="fa-solid fa-check text-gold mt-1"></i> Acta de examen.</li>
+                            <li class="flex gap-3 items-start"><i class="fa-solid fa-check text-gold mt-1"></i> Gestión administrativa y académica.</li>
+                            <li class="flex gap-3 items-start"><i class="fa-solid fa-check text-gold mt-1"></i> Emisión de la documentación correspondiente.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Modalidades -->
+                    <div class="bg-navy/50 border border-white/10 p-6 rounded-2xl">
+                        <h4 class="text-white font-bold mb-4 text-lg border-b border-white/10 pb-2">Modalidades de Obtención de Grado:</h4>
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-300 font-light">
+                            <li class="flex gap-2 items-center"><i class="fa-regular fa-circle-dot text-cyan text-xs"></i> Titulación por excelencia (Promedio 10)</li>
+                            <li class="flex gap-2 items-center"><i class="fa-regular fa-circle-dot text-cyan text-xs"></i> Titulación automática (Promedio 9.0)</li>
+                            <li class="flex gap-2 items-center"><i class="fa-regular fa-circle-dot text-cyan text-xs"></i> Publicación</li>
+                            <li class="flex gap-2 items-center"><i class="fa-regular fa-circle-dot text-cyan text-xs"></i> Tesis</li>
+                            <li class="flex gap-2 items-center"><i class="fa-regular fa-circle-dot text-cyan text-xs"></i> Examen General de conocimiento</li>
+                            <li class="flex gap-2 items-center"><i class="fa-regular fa-circle-dot text-cyan text-xs"></i> Curso de titulación</li>
+                            <li class="flex gap-2 items-center sm:col-span-2"><i class="fa-regular fa-circle-dot text-cyan text-xs"></i> Por Estudio de Doctorado (50% de créditos)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Campañas -->
+                <div class="bg-gradient-to-r from-cyan/10 to-transparent border-l-4 border-cyan p-5 rounded-r-xl mb-8">
+                    <h4 class="text-cyan font-bold mb-2 flex items-center gap-2"><i class="fa-solid fa-tags"></i> Campañas y beneficios</h4>
+                    <p class="text-sm text-gray-300 leading-relaxed font-light">Durante el año, la institución puede ofrecer campañas especiales de apoyo para titulación, con beneficios que varían según la temporada y las convocatorias vigentes. Las promociones no son permanentes ni garantizadas, por lo que te recomendamos consultar con un asesor para conocer si existe alguna campaña disponible al momento de tu inscripción o cuando estés próximo a titularte.</p>
+                </div>
+
+                <!-- Quote Persuasiva -->
+                <blockquote class="border-l-4 border-gold bg-gold/5 p-6 rounded-r-2xl text-gold italic font-serif text-center md:text-lg">
+                    "Invertir en tu titulación es dar el último paso para convertir tu preparación en un logro con reconocimiento oficial y mayores oportunidades profesionales."
+                </blockquote>
             </div>
 
             <!-- VALOR AGREGADO -->
@@ -478,21 +494,11 @@
 
         <!-- INVERSIÓN DINÁMICA -->
         <section id="inversion" class="view-section py-8 md:py-12">
-            <!-- BOTÓN REGRESAR NUEVO -->
             <button onclick="goToView('metodologia')" class="text-gray-400 hover:text-gold mb-8 transition font-mono text-sm tracking-widest uppercase"><i class="fa-solid fa-chevron-left mr-2"></i> Regresar al Ecosistema</button>
 
             <div class="text-center mb-12">
                 <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">Esquema de Inversión Institucional</h2>
                 <p class="text-gray-400 text-lg font-light">Estructura financiera asignada para su nivel académico.</p>
-            </div>
-
-            <!-- VALOR DE LA ACTUALIZACION -->
-            <div class="glass-panel border-l-4 border-l-accent p-6 md:p-8 rounded-2xl mb-12 max-w-5xl mx-auto shadow-2xl relative overflow-hidden">
-                <div class="absolute right-0 top-0 opacity-10 text-9xl transform translate-x-4 -translate-y-4"><i class="fa-solid fa-rocket"></i></div>
-                <h3 class="text-xl md:text-2xl font-serif font-bold text-white mb-3 relative z-10">Perspectiva de Crecimiento: El Valor de su Actualización</h3>
-                <p class="text-gray-300 font-light leading-relaxed text-sm md:text-lg relative z-10">
-                    Evaluar únicamente la cuota mensual limita la visión estratégica. Le invitamos a considerar: <strong>¿Cuál es el costo real de posponer su crecimiento, estancarse salarialmente o ceder un ascenso directivo?</strong> El costo de la inacción supera ampliamente la inversión educativa. Este programa es su catalizador profesional más seguro.
-                </p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 mb-16">
@@ -802,6 +808,13 @@
             goToView('view-plan');
         }
 
+        function generarFolioSeguro() {
+            const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const chars = letras.charAt(Math.floor(Math.random() * letras.length)) + letras.charAt(Math.floor(Math.random() * letras.length));
+            const num = Math.floor(100 + Math.random() * 900);
+            return `CIP-${chars}-${num}`;
+        }
+
         function preparaInversion() {
             // Validar si 'carreraActiva' existe, de lo contrario obligamos a seleccionar nivel
             if(!carreraActiva) {
@@ -812,16 +825,21 @@
             const contenedorTabla = document.getElementById('contenedor-tabla-precios');
             const listaReq = document.getElementById('lista-requisitos');
             
+            const folioActual = generarFolioSeguro();
+
             // --- BANNER DE URGENCIA PROFESIONAL ---
             const bannerUrgencia = `
                 <div class="bg-gradient-to-r from-red-900/40 to-transparent border-l-4 border-red-500 p-5 mb-8 rounded-r-2xl shadow-lg relative overflow-hidden">
                     <div class="absolute right-0 top-0 opacity-10 text-6xl transform translate-x-4 -translate-y-4"><i class="fa-solid fa-stopwatch"></i></div>
-                    <p class="text-white font-bold text-sm tracking-widest uppercase relative z-10 flex items-center gap-3">
+                    <p class="text-white font-bold md:text-lg tracking-widest uppercase relative z-10 flex items-center gap-3">
                         <span class="relative flex h-3 w-3"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span></span>
-                        Folio de Beca Institucional Limitado
+                        FOLIO DE BECA: ${folioActual}
                     </p>
-                    <p class="text-gray-300 text-xs md:text-sm mt-2 font-light leading-relaxed relative z-10">
-                        Los beneficios financieros de este folio vencen en cuanto se cubra el cupo neto del ciclo actual. Asegure su inversión y su lugar completando su registro.
+                    <div class="mt-3 flex items-center gap-2 relative z-10">
+                        <span class="bg-red-500/20 text-red-300 text-xs font-mono px-2 py-1 rounded border border-red-500/30 uppercase tracking-widest">Vigencia: 24 Horas</span>
+                    </div>
+                    <p class="text-gray-300 text-xs md:text-sm mt-3 font-light leading-relaxed relative z-10">
+                        Los beneficios financieros ligados a este folio vencen en cuanto se cumpla el plazo de 24 horas o se alcance el límite del cupo neto del ciclo actual. Asegure su inversión completando su registro.
                     </p>
                 </div>
             `;
